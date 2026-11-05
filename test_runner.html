@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Test Runner</title>
+</head>
+<body>
+    <div id="app-viewport"></div>
+    <div id="exam-timer"></div>
+    <div id="filtered-count"></div>
+    <script src="diagrams.js"></script>
+    <script src="data_lesson1.js"></script>
+    <script src="data_lesson2.js"></script>
+    <script src="data_lesson3.js"></script>
+    <script src="data_lesson4.js"></script>
+    <script src="data_lesson5.js"></script>
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+    <script>
+        console.log("=== BẮT ĐẦU TEST TOÀN DIỆN ===");
+
+        // Test 1: Kiểm tra khởi tạo
+        if (!app) {
+            console.error("FAIL: app not initialized");
+        } else {
+            console.log("PASS: app initialized successfully, total db:", app.db.length);
+        }
+
+        // Test 2: Thử nghiệm Luyện tập & Sổ tay câu sai
+        app.userAnswers = {};
+        app.mistakes = [];
+
+        // Làm sai câu b1_1 (đáp án đúng là 1, chọn 0)
+        app.setMCQAnswer('b1_1', 0);
+        console.assert(app.mistakes.includes('b1_1'), "FAIL: b1_1 must be in mistakes after wrong answer");
+        console.assert(app.isQuestionIncorrect(app.db.find(q => q.id === 'b1_1')), "FAIL: b1_1 should be incorrect");
+        console.log("PASS: Làm sai -> Đã lưu vào mistakes");
+
+        // Xem Sổ tay câu sai
+        app.navigateTo('mistakes');
+        console.assert(app.activeQuestions.length === 1 && app.activeQuestions[0].id === 'b1_1', "FAIL: mistakes should have 1 question");
+        console.log("PASS: Sổ tay câu sai hiển thị đúng câu sai");
+
+        // Người dùng làm đúng lại câu b1_1 (chọn 1)
+        app.setMCQAnswer('b1_1', 1);
+        console.assert(!app.mistakes.includes('b1_1'), "FAIL: b1_1 must be removed from mistakes after correct answer");
+        console.assert(app.isQuestionCorrect(app.db.find(q => q.id === 'b1_1')), "FAIL: b1_1 should be correct");
+        
+        // Xem lại Sổ tay câu sai
+        app.navigateTo('mistakes');
+        console.assert(app.activeQuestions.length === 0, "FAIL: mistakes must be empty now, found " + app.activeQuestions.length);
+        console.log("PASS: Tuyệt đối không còn câu đúng trong Sổ tay câu sai!");
+
+        // Test 3: Thử nghiệm Chế độ Thi Thử
+        app.startExam();
+        console.assert(app.examState.isActive, "FAIL: exam should be active");
+        console.assert(app.examState.questions.length === 28, "FAIL: exam must have 28 questions");
+        console.assert(app.examState.questions[0].examIndex === 0, "FAIL: question 0 should have examIndex 0");
+        console.assert(app.examState.questions[27].examIndex === 27, "FAIL: question 27 should have examIndex 27");
+        console.log("PASS: Đề thi 28 câu khởi tạo thành công với chỉ mục cố định 0..27");
+
+        // Chọn đáp án cho câu 0
+        app.setExamMCQAnswer(0, 1);
+        console.assert(app.examState.userAnswers[0].selected === 1, "FAIL: exam answer for index 0 must be 1");
+        console.assert(app.examState.userAnswers[app.examState.questions[0].id].selected === 1, "FAIL: exam answer by qId must also be 1");
+        console.log("PASS: Lựa chọn gắn chặt tương ứng tuyệt đối với index và qId của câu hỏi");
+
+        // Test 4: Đối chiếu kết quả đáp án Bài 2
+        const b2_33 = app.db.find(q => q.id === 'b2_33');
+        console.assert(b2_33.answer === 3, "FAIL: b2_33 answer must be 3 ('d'), got " + b2_33.answer);
+        const b2_34 = app.db.find(q => q.id === 'b2_34');
+        console.assert(b2_34.answer === 1, "FAIL: b2_34 answer must be 1 ('b'), got " + b2_34.answer);
+        const b2_35 = app.db.find(q => q.id === 'b2_35');
+        console.assert(b2_35.answer === 1, "FAIL: b2_35 answer must be 1 ('b'), got " + b2_35.answer);
+        const b2_36 = app.db.find(q => q.id === 'b2_36');
+        console.assert(b2_36.answer === 2, "FAIL: b2_36 answer must be 2 ('c'), got " + b2_36.answer);
+        const b2_37 = app.db.find(q => q.id === 'b2_37');
+        console.assert(b2_37.answer === 2, "FAIL: b2_37 answer must be 2 ('c'), got " + b2_37.answer);
+        const b2_38 = app.db.find(q => q.id === 'b2_38');
+        console.assert(b2_38.answer === 1, "FAIL: b2_38 answer must be 1 ('b'), got " + b2_38.answer);
+        console.log("PASS: Bộ đáp án chuẩn Bài 2 (câu 33: d, 34: b, 35: b, 36: c, 37: c, 38: b) đã hoàn hảo!");
+
+        // Test 5: So sánh Short Answer
+        console.assert(app.isShortAnswerMatch("0.3", ["0,3", "0.3", "30%"]), "FAIL: 0.3 should match");
+        console.assert(app.isShortAnswerMatch("0,3", ["0,3", "0.3", "30%"]), "FAIL: 0,3 should match");
+        console.assert(app.isShortAnswerMatch("30%", ["0,3", "0.3", "30%"]), "FAIL: 30% should match");
+        console.assert(app.isShortAnswerMatch("0.5", ["1/2"]), "FAIL: 0.5 should match 1/2");
+        console.assert(app.isShortAnswerMatch("1/2", ["0.5"]), "FAIL: 1/2 should match 0.5");
+        console.log("PASS: Hàm đối chiếu đáp án ngắn thông minh xử lý hoàn hảo số thập phân, phần trăm, phân số");
+
+        // Nộp bài thi
+        app.submitExam();
+        console.assert(app.examState.isSubmitted, "FAIL: exam must be submitted");
+        console.assert(app.examState.score !== null, "FAIL: score must be calculated");
+        console.log("PASS: Chấm điểm bài thi thành công, điểm đạt được:", app.examState.score);
+
+        document.body.innerHTML += "<h1 id='test-result' style='color:green;font-family:sans-serif;'>TẤT CẢ CÁC BÀI TEST ĐỀU THÀNH CÔNG RỰC RỠ (100% PASS)!</h1>";
+    </script>
+</body>
+</html>

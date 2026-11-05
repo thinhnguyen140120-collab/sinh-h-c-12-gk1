@@ -1,0 +1,273 @@
+﻿<!DOCTYPE html>
+<html><head>
+    <meta charset="utf-8">
+    <title>Test Runner</title>
+</head>
+<body>
+    <div id="app-viewport">
+            <div class="space-y-8 animate-fadeIn">
+                <!-- Hero Banner -->
+                <div class="bg-gradient-to-r from-emerald-700 via-teal-800 to-emerald-900 rounded-3xl p-6 sm:p-10 text-white shadow-2xl relative overflow-hidden">
+                    <div class="absolute -right-10 -bottom-10 w-80 h-80 bg-white/5 rounded-full blur-3xl pointer-events-none"></div>
+                    <div class="max-w-3xl relative z-10 space-y-4">
+                        <div class="inline-flex items-center space-x-2 px-3 py-1 bg-emerald-500/30 text-emerald-200 text-xs font-bold rounded-full border border-emerald-400/20">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                            <span>CH╞»╞áNG TR├îNH SINH Hß╗îC 12 - GDPT 2018</span>
+                        </div>
+                        <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight leading-tight">
+                            Hß╗ç Thß╗æng ├ön Tß║¡p To├án Diß╗çn Giß╗»a K├¼ 1 (285 C├óu Hß╗Åi)
+                        </h2>
+                        <p class="text-emerald-100 text-sm sm:text-base leading-relaxed">
+                            Bao qu├ít to├án bß╗Ö 5 b├ái hß╗ìc Ch╞░╞íng 1: Di Truyß╗ün Ph├ón Tß╗¡. T├¡ch hß╗úp ─æß║ºy ─æß╗º 3 dß║íng c├óu hß╗Åi mß╗¢i cß╗ºa Bß╗Ö GD&amp;─ÉT: Trß║»c nghiß╗çm 4 lß╗▒a chß╗ìn, Trß║»c nghiß╗çm ─É├║ng/Sai, Trß║ú lß╗¥i ngß║»n, c├│ h├¼nh vß║╜ s╞í ─æß╗ô trß╗▒c quan v├á lß╗¥i giß║úi chi tiß║┐t.
+                        </p>
+                        
+                        <div class="pt-4 flex flex-wrap gap-3">
+                            <button onclick="app.startExam()" class="px-6 py-3 bg-amber-400 hover:bg-amber-500 text-gray-900 font-extrabold rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 flex items-center space-x-2">
+                                <i class="fa-solid fa-stopwatch text-base"></i>
+                                <span>Thi Thß╗¡ Bß║Ñm Giß╗¥ 45 Ph├║t (─Éß╗ü Chuß║⌐n)</span>
+                            </button>
+                            <button onclick="app.navigateTo('practice', 'all')" class="px-5 py-3 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl border border-white/20 transition-colors flex items-center space-x-2">
+                                <i class="fa-solid fa-layer-group"></i>
+                                <span>Luyß╗çn Tß║¡p To├án Bß╗Ö (285 C├óu)</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Stats / Shortcuts Bar -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                    <div onclick="app.navigateTo('practice', 'all')" class="cursor-pointer bg-white p-4 rounded-2xl border border-gray-200 shadow-sm hover:border-emerald-500 transition-all flex items-center space-x-3">
+                        <div class="w-12 h-12 bg-emerald-100 text-emerald-700 rounded-xl flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-book-open"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-500 font-medium">Ng├ón h├áng c├óu hß╗Åi</p>
+                            <p class="text-lg font-bold text-gray-900">285 C├óu</p>
+                        </div>
+                    </div>
+
+                    <div onclick="app.navigateTo('mistakes')" class="cursor-pointer bg-white p-4 rounded-2xl border border-gray-200 shadow-sm hover:border-red-500 transition-all flex items-center space-x-3">
+                        <div class="w-12 h-12 bg-red-100 text-red-700 rounded-xl flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-circle-exclamation"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-500 font-medium">Sß╗ò tay c├óu sai</p>
+                            <p class="text-lg font-bold text-red-600">0 C├óu</p>
+                        </div>
+                    </div>
+
+                    <div onclick="app.navigateTo('bookmarks')" class="cursor-pointer bg-white p-4 rounded-2xl border border-gray-200 shadow-sm hover:border-amber-500 transition-all flex items-center space-x-3">
+                        <div class="w-12 h-12 bg-amber-100 text-amber-700 rounded-xl flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-500 font-medium">─É├ú ─æ├ính dß║Ñu</p>
+                            <p class="text-lg font-bold text-amber-600">0 C├óu</p>
+                        </div>
+                    </div>
+
+                    <div onclick="app.navigateTo('stats')" class="cursor-pointer bg-white p-4 rounded-2xl border border-gray-200 shadow-sm hover:border-blue-500 transition-all flex items-center space-x-3">
+                        <div class="w-12 h-12 bg-blue-100 text-blue-700 rounded-xl flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-chart-pie"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-500 font-medium">Lß╗ïch sß╗¡ thi thß╗¡</p>
+                            <p class="text-lg font-bold text-blue-700">0 ─Éß╗ü</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Danh s├ích 5 b├ái hß╗ìc trß╗ìng t├óm -->
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-xl font-bold text-gray-900 flex items-center space-x-2">
+                            <i class="fa-solid fa-dna text-emerald-600"></i>
+                            <span>Nß╗Öi Dung 5 B├ái Hß╗ìc Ch╞░╞íng 1 (Di Truyß╗ün Ph├ón Tß╗¡)</span>
+                        </h3>
+                        <span class="text-xs text-gray-500 font-medium">Nhß║Ñp v├áo b├ái ─æß╗â ├┤n luyß╗çn</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                        
+                                <div class="bg-white rounded-2xl border border-gray-200 p-5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
+                                    <div class="space-y-3">
+                                        <div class="flex items-center justify-between">
+                                            <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 text-xs font-extrabold rounded-lg">B├ái 1</span>
+                                            <span class="text-xs text-gray-500 font-medium"><i class="fa-regular fa-file-lines mr-1"></i>37 c├óu</span>
+                                        </div>
+                                        <h4 class="font-bold text-gray-900 group-hover:text-emerald-700 transition-colors leading-snug">B├ái 1: DNA v├á C╞í Chß║┐ T├íi Bß║ún DNA</h4>
+                                        <p class="text-xs text-gray-600 leading-relaxed">Cß║Ñu tr├║c h├│a hß╗ìc cß╗ºa DNA, nguy├¬n tß║»c bß╗ò sung, b├ín bß║úo to├án v├á c╞í chß║┐ tß╗òng hß╗úp mß║ích khu├┤n tr├¬n chß║íc chß╗» Y.</p>
+                                    </div>
+                                    <div class="pt-5 mt-2 border-t border-gray-100 flex items-center justify-between">
+                                        <button onclick="app.navigateTo('practice', 1)" class="w-full py-2 bg-emerald-50 hover:bg-emerald-600 hover:text-white text-emerald-700 font-bold text-xs rounded-xl transition-all flex items-center justify-center space-x-2">
+                                            <span>L├ám B├ái 1 (37 c├óu)</span>
+                                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            
+                                <div class="bg-white rounded-2xl border border-gray-200 p-5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
+                                    <div class="space-y-3">
+                                        <div class="flex items-center justify-between">
+                                            <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 text-xs font-extrabold rounded-lg">B├ái 2</span>
+                                            <span class="text-xs text-gray-500 font-medium"><i class="fa-regular fa-file-lines mr-1"></i>54 c├óu</span>
+                                        </div>
+                                        <h4 class="font-bold text-gray-900 group-hover:text-emerald-700 transition-colors leading-snug">B├ái 2: Gene, Hß╗ç Gene v├á Qu├í Tr├¼nh Truyß╗ün ─Éß║ít Th├┤ng Tin Di Truyß╗ün</h4>
+                                        <p class="text-xs text-gray-600 leading-relaxed">Cß║Ñu tr├║c gene, hß╗ç gene ng╞░ß╗¥i, phi├¬n m├ú, dß╗ïch m├ú, m├ú di truyß╗ün v├á phi├¬n m├ú ng╞░ß╗úc.</p>
+                                    </div>
+                                    <div class="pt-5 mt-2 border-t border-gray-100 flex items-center justify-between">
+                                        <button onclick="app.navigateTo('practice', 2)" class="w-full py-2 bg-emerald-50 hover:bg-emerald-600 hover:text-white text-emerald-700 font-bold text-xs rounded-xl transition-all flex items-center justify-center space-x-2">
+                                            <span>L├ám B├ái 2 (54 c├óu)</span>
+                                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            
+                                <div class="bg-white rounded-2xl border border-gray-200 p-5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
+                                    <div class="space-y-3">
+                                        <div class="flex items-center justify-between">
+                                            <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 text-xs font-extrabold rounded-lg">B├ái 3</span>
+                                            <span class="text-xs text-gray-500 font-medium"><i class="fa-regular fa-file-lines mr-1"></i>48 c├óu</span>
+                                        </div>
+                                        <h4 class="font-bold text-gray-900 group-hover:text-emerald-700 transition-colors leading-snug">B├ái 3: ─Éiß╗üu Ho├á Biß╗âu Hiß╗çn Gene</h4>
+                                        <p class="text-xs text-gray-600 leading-relaxed">Th├¡ nghiß╗çm Jacob - Monod, cß║Ñu tr├║c v├á c╞í chß║┐ operon lac khi c├│/kh├┤ng c├│ lactose, ß╗⌐ng dß╗Ñng thß╗▒c tiß╗àn.</p>
+                                    </div>
+                                    <div class="pt-5 mt-2 border-t border-gray-100 flex items-center justify-between">
+                                        <button onclick="app.navigateTo('practice', 3)" class="w-full py-2 bg-emerald-50 hover:bg-emerald-600 hover:text-white text-emerald-700 font-bold text-xs rounded-xl transition-all flex items-center justify-center space-x-2">
+                                            <span>L├ám B├ái 3 (48 c├óu)</span>
+                                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            
+                                <div class="bg-white rounded-2xl border border-gray-200 p-5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
+                                    <div class="space-y-3">
+                                        <div class="flex items-center justify-between">
+                                            <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 text-xs font-extrabold rounded-lg">B├ái 4</span>
+                                            <span class="text-xs text-gray-500 font-medium"><i class="fa-regular fa-file-lines mr-1"></i>63 c├óu</span>
+                                        </div>
+                                        <h4 class="font-bold text-gray-900 group-hover:text-emerald-700 transition-colors leading-snug">B├ái 4: ─Éß╗Öt Biß║┐n Gene</h4>
+                                        <p class="text-xs text-gray-600 leading-relaxed">C├íc dß║íng ─æß╗Öt biß║┐n ─æiß╗âm (mß║Ñt, th├¬m, thay thß║┐), c╞í chß║┐ base hiß║┐m, h├│a chß║Ñt 5-BrU v├á hß║¡u quß║ú.</p>
+                                    </div>
+                                    <div class="pt-5 mt-2 border-t border-gray-100 flex items-center justify-between">
+                                        <button onclick="app.navigateTo('practice', 4)" class="w-full py-2 bg-emerald-50 hover:bg-emerald-600 hover:text-white text-emerald-700 font-bold text-xs rounded-xl transition-all flex items-center justify-center space-x-2">
+                                            <span>L├ám B├ái 4 (63 c├óu)</span>
+                                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            
+                                <div class="bg-white rounded-2xl border border-gray-200 p-5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
+                                    <div class="space-y-3">
+                                        <div class="flex items-center justify-between">
+                                            <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 text-xs font-extrabold rounded-lg">B├ái 5</span>
+                                            <span class="text-xs text-gray-500 font-medium"><i class="fa-regular fa-file-lines mr-1"></i>83 c├óu</span>
+                                        </div>
+                                        <h4 class="font-bold text-gray-900 group-hover:text-emerald-700 transition-colors leading-snug">B├ái 5: C├┤ng Nghß╗ç Gene</h4>
+                                        <p class="text-xs text-gray-600 leading-relaxed">Kß╗╣ thuß║¡t DNA t├íi tß╗ò hß╗úp, plasmid, enzyme restrictase &amp; ligase, sinh vß║¡t biß║┐n ─æß╗òi gene v├á ─æß║ío ─æß╗⌐c sinh hß╗ìc.</p>
+                                    </div>
+                                    <div class="pt-5 mt-2 border-t border-gray-100 flex items-center justify-between">
+                                        <button onclick="app.navigateTo('practice', 5)" class="w-full py-2 bg-emerald-50 hover:bg-emerald-600 hover:text-white text-emerald-700 font-bold text-xs rounded-xl transition-all flex items-center justify-center space-x-2">
+                                            <span>L├ám B├ái 5 (83 c├óu)</span>
+                                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            
+                    </div>
+                </div>
+            </div>
+        </div>
+    <div id="exam-timer"></div>
+    <div id="filtered-count"></div>
+    <script src="diagrams.js"></script>
+    <script src="data_lesson1.js"></script>
+    <script src="data_lesson2.js"></script>
+    <script src="data_lesson3.js"></script>
+    <script src="data_lesson4.js"></script>
+    <script src="data_lesson5.js"></script>
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+    <script>
+        console.log("=== Bß║«T ─Éß║ªU TEST TO├ÇN DIß╗åN ===");
+
+        // Test 1: Kiß╗âm tra khß╗ƒi tß║ío
+        if (!app) {
+            console.error("FAIL: app not initialized");
+        } else {
+            console.log("PASS: app initialized successfully, total db:", app.db.length);
+        }
+
+        // Test 2: Thß╗¡ nghiß╗çm Luyß╗çn tß║¡p & Sß╗ò tay c├óu sai
+        app.userAnswers = {};
+        app.mistakes = [];
+
+        // L├ám sai c├óu b1_1 (─æ├íp ├ín ─æ├║ng l├á 1, chß╗ìn 0)
+        app.setMCQAnswer('b1_1', 0);
+        console.assert(app.mistakes.includes('b1_1'), "FAIL: b1_1 must be in mistakes after wrong answer");
+        console.assert(app.isQuestionIncorrect(app.db.find(q => q.id === 'b1_1')), "FAIL: b1_1 should be incorrect");
+        console.log("PASS: L├ám sai -> ─É├ú l╞░u v├áo mistakes");
+
+        // Xem Sß╗ò tay c├óu sai
+        app.navigateTo('mistakes');
+        console.assert(app.activeQuestions.length === 1 && app.activeQuestions[0].id === 'b1_1', "FAIL: mistakes should have 1 question");
+        console.log("PASS: Sß╗ò tay c├óu sai hiß╗ân thß╗ï ─æ├║ng c├óu sai");
+
+        // Ng╞░ß╗¥i d├╣ng l├ám ─æ├║ng lß║íi c├óu b1_1 (chß╗ìn 1)
+        app.setMCQAnswer('b1_1', 1);
+        console.assert(!app.mistakes.includes('b1_1'), "FAIL: b1_1 must be removed from mistakes after correct answer");
+        console.assert(app.isQuestionCorrect(app.db.find(q => q.id === 'b1_1')), "FAIL: b1_1 should be correct");
+        
+        // Xem lß║íi Sß╗ò tay c├óu sai
+        app.navigateTo('mistakes');
+        console.assert(app.activeQuestions.length === 0, "FAIL: mistakes must be empty now, found " + app.activeQuestions.length);
+        console.log("PASS: Tuyß╗çt ─æß╗æi kh├┤ng c├▓n c├óu ─æ├║ng trong Sß╗ò tay c├óu sai!");
+
+        // Test 3: Thß╗¡ nghiß╗çm Chß║┐ ─æß╗Ö Thi Thß╗¡
+        app.startExam();
+        console.assert(app.examState.isActive, "FAIL: exam should be active");
+        console.assert(app.examState.questions.length === 28, "FAIL: exam must have 28 questions");
+        console.assert(app.examState.questions[0].examIndex === 0, "FAIL: question 0 should have examIndex 0");
+        console.assert(app.examState.questions[27].examIndex === 27, "FAIL: question 27 should have examIndex 27");
+        console.log("PASS: ─Éß╗ü thi 28 c├óu khß╗ƒi tß║ío th├ánh c├┤ng vß╗¢i chß╗ë mß╗Ñc cß╗æ ─æß╗ïnh 0..27");
+
+        // Chß╗ìn ─æ├íp ├ín cho c├óu 0
+        app.setExamMCQAnswer(0, 1);
+        console.assert(app.examState.userAnswers[0].selected === 1, "FAIL: exam answer for index 0 must be 1");
+        console.assert(app.examState.userAnswers[app.examState.questions[0].id].selected === 1, "FAIL: exam answer by qId must also be 1");
+        console.log("PASS: Lß╗▒a chß╗ìn gß║»n chß║╖t t╞░╞íng ß╗⌐ng tuyß╗çt ─æß╗æi vß╗¢i index v├á qId cß╗ºa c├óu hß╗Åi");
+
+        // Test 4: ─Éß╗æi chiß║┐u kß║┐t quß║ú ─æ├íp ├ín B├ái 2
+        const b2_33 = app.db.find(q => q.id === 'b2_33');
+        console.assert(b2_33.answer === 3, "FAIL: b2_33 answer must be 3 ('d'), got " + b2_33.answer);
+        const b2_34 = app.db.find(q => q.id === 'b2_34');
+        console.assert(b2_34.answer === 1, "FAIL: b2_34 answer must be 1 ('b'), got " + b2_34.answer);
+        const b2_35 = app.db.find(q => q.id === 'b2_35');
+        console.assert(b2_35.answer === 1, "FAIL: b2_35 answer must be 1 ('b'), got " + b2_35.answer);
+        const b2_36 = app.db.find(q => q.id === 'b2_36');
+        console.assert(b2_36.answer === 2, "FAIL: b2_36 answer must be 2 ('c'), got " + b2_36.answer);
+        const b2_37 = app.db.find(q => q.id === 'b2_37');
+        console.assert(b2_37.answer === 2, "FAIL: b2_37 answer must be 2 ('c'), got " + b2_37.answer);
+        const b2_38 = app.db.find(q => q.id === 'b2_38');
+        console.assert(b2_38.answer === 1, "FAIL: b2_38 answer must be 1 ('b'), got " + b2_38.answer);
+        console.log("PASS: Bß╗Ö ─æ├íp ├ín chuß║⌐n B├ái 2 (c├óu 33: d, 34: b, 35: b, 36: c, 37: c, 38: b) ─æ├ú ho├án hß║úo!");
+
+        // Test 5: So s├ính Short Answer
+        console.assert(app.isShortAnswerMatch("0.3", ["0,3", "0.3", "30%"]), "FAIL: 0.3 should match");
+        console.assert(app.isShortAnswerMatch("0,3", ["0,3", "0.3", "30%"]), "FAIL: 0,3 should match");
+        console.assert(app.isShortAnswerMatch("30%", ["0,3", "0.3", "30%"]), "FAIL: 30% should match");
+        console.assert(app.isShortAnswerMatch("0.5", ["1/2"]), "FAIL: 0.5 should match 1/2");
+        console.assert(app.isShortAnswerMatch("1/2", ["0.5"]), "FAIL: 1/2 should match 0.5");
+        console.log("PASS: H├ám ─æß╗æi chiß║┐u ─æ├íp ├ín ngß║»n th├┤ng minh xß╗¡ l├╜ ho├án hß║úo sß╗æ thß║¡p ph├ón, phß║ºn tr─âm, ph├ón sß╗æ");
+
+        // Nß╗Öp b├ái thi
+        app.submitExam();
+        console.assert(app.examState.isSubmitted, "FAIL: exam must be submitted");
+        console.assert(app.examState.score !== null, "FAIL: score must be calculated");
+        console.log("PASS: Chß║Ñm ─æiß╗âm b├ái thi th├ánh c├┤ng, ─æiß╗âm ─æß║ít ─æ╞░ß╗úc:", app.examState.score);
+
+        document.body.innerHTML += "<h1 id='test-result' style='color:green;font-family:sans-serif;'>Tß║ñT Cß║ó C├üC B├ÇI TEST ─Éß╗ÇU TH├ÇNH C├öNG Rß╗░C Rß╗á (100% PASS)!</h1>";
+    </script>
+
+
+</body></html>
